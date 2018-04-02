@@ -1,5 +1,8 @@
 import java.util.Arrays;
 import java.util.Arrays.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class ArraysPractice{
 
@@ -23,12 +26,25 @@ public class ArraysPractice{
 		Arrays.sort(arr3);
 		
         System.out.printf("\n\nAfter sort: %s\n\n", Arrays.toString(arr3));
-        
+
+        System.out.println("Leaders");
         int arr4[] = new int[]{16, 17, 4, 3, 5, 2};
         leaders(arr4, arr4.length);
 
         int arr5[] = new int[]{1,2,3,4,0};
         leaders(arr5, arr5.length);
+
+        System.out.println("\nDistinct Ids");
+        int arr6[] = {2, 3, 1, 2, 3, 3};
+        int m = 3;
+ 
+        System.out.println(distinctIds(arr6, arr6.length, m));
+
+        int arr7[] = {2, 4, 1, 5, 3, 5, 1, 3};
+        m = 2;
+ 
+        System.out.println(distinctIds(arr7, arr7.length, m));
+
 
     } // end of main
 
@@ -91,4 +107,43 @@ public class ArraysPractice{
         System.out.printf("%d \n", maxInt);
     } // end of leaders
 
+      // Function to find distintc id's
+      public static int distinctIds(int arr[], int n, int mi)
+      {
+   
+          Map<Integer, Integer> m = new HashMap<Integer, Integer>();
+          int count = 0;
+          int size = 0;
+   
+          // Store the occurrence of ids
+          for (int i = 0; i < n; i++)
+          {
+   
+              // If the key is not add it to map
+              if (m.containsKey(arr[i]) == false)
+              {
+                  m.put(arr[i], 1);
+                  size++;
+              }
+   
+              // If it is present then increase the value by 1
+              else m.put(arr[i], m.get(arr[i]) + 1);
+          }
+   
+          // Start removing elements from the beginning
+          for (Entry<Integer, Integer> mp:m.entrySet())
+          {
+              // Remove if current value is less than
+              // or equal to mi
+              if (mp.getKey() <= mi)
+              {
+                  mi -= mp.getKey();
+                  count++;
+              }
+              // Return the remaining size
+              else return size - count;
+          }
+   
+          return size - count;
+      }
 } // end of ArraysPractice
