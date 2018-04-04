@@ -5,6 +5,7 @@ import java.util.Arrays.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Stack.*;
 
 public class ArraysPractice{
 
@@ -47,6 +48,9 @@ public class ArraysPractice{
  
         System.out.println(distinctIds(arr7, arr7.length, m));
 
+        System.out.println("\nValidate Paranthesis");
+        String paran = "((())(()))";
+        validateParanthesis(paran);
 
     } // end of main
 
@@ -147,5 +151,35 @@ public class ArraysPractice{
           }
    
           return size - count;
+      } // Distinct Ids
+
+      public static void validateParanthesis(String str){
+ 
+            int strLen = str.length();
+    
+            for(int i = 0; i < strLen; i++){
+                if(str.charAt(i) == '('){
+                    Stack.push(str.charAt(i));
+                }
+                if(str.charAt(i) == ')'){
+                    if(Stack.isEmpty()){
+                        System.out.println("Missmatched paranthesis");
+                    }
+                    else if(!isMatchingPair(Stack.pop(), str.charAt(i))){
+                        System.out.println("Paranthesis are maching");
+                    }
+                }
+            }
+    
+      } // end of validateParanthesis
+
+      public static boolean isMatchingPair(char char1, char char2){
+          if(char1 == '(' && char2 == ')'){
+              return true;
+          }
+          else{
+              return false;
+          }
       }
+
 } // end of ArraysPractice
