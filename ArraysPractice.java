@@ -156,7 +156,6 @@ public class ArraysPractice{
       public static void validateParanthesis(String str){
  
             int strLen = str.length();
-    
             for(int i = 0; i < strLen; i++){
                 if(str.charAt(i) == '('){
                     Stack.push(str.charAt(i));
