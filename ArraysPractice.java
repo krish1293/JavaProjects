@@ -5,6 +5,7 @@ import java.util.Arrays.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.*;
 import java.util.Stack.*;
 
 public class ArraysPractice{
@@ -21,8 +22,8 @@ public class ArraysPractice{
         // use this if subArraySum was no defined as a static method
         //  ArraysPractice arrSum = new ArraysPractice();
         // arrSum.subArraySum(arr2, n, sum);
-        
-        int arrSum = subArraySum(arr2, n, sum);
+        // s
+        subArraySum(arr2, n, sum);
 
 		int arr3[] = new int[] {0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1};
 		
@@ -48,6 +49,12 @@ public class ArraysPractice{
  
         System.out.println(distinctIds(arr7, arr7.length, m));
 
+        System.out.println("\nWordLen4InStr");
+        String str = "This sentence has four words";
+        wordLen4InStr(str);
+        System.out.println("\nValidate Paranthesis");
+       // String paran = "((())(()))";
+       // validateParanthesis(paran);
         System.out.println("\nValidate Paranthesis");
         String paran = "((())(()))";
         validateParanthesis(paran);
@@ -153,6 +160,7 @@ public class ArraysPractice{
           return size - count;
       } // Distinct Ids
 
+ /**     public static void validateParanthesis(String str){
       public static void validateParanthesis(String str){
  
             int strLen = str.length();
@@ -161,6 +169,8 @@ public class ArraysPractice{
                     Stack.push(str.charAt(i));
                 }
                 if(str.charAt(i) == ')'){
+    //                boolean empty = Stack.isEmpty();
+					if(empty){
                     if(Stack.isEmpty()){
                         System.out.println("Missmatched paranthesis");
                     }
@@ -170,8 +180,9 @@ public class ArraysPractice{
                 }
             }
     
-      } // end of validateParanthesis
-
+          } // end of validateParanthesis
+**/
+   
       public static boolean isMatchingPair(char char1, char char2){
           if(char1 == '(' && char2 == ')'){
               return true;
@@ -181,4 +192,25 @@ public class ArraysPractice{
           }
       }
 
+      public static void wordLen4InStr(String str){
+
+        System.out.println(str);
+        int numWord = 0;
+        String[] splitStr = str.split(" ");
+
+        for(String elm: splitStr){
+       
+            if(elm.length() == 4){
+                System.out.println(elm);
+                numWord += 1;
+            }
+        }
+        System.out.printf("Total number of words with length 4 are %d\n", numWord);
+      } // end of wordLen4InStr
+
+      public static void palindromicScore(String str){
+
+      } // end of palindromicScore
+
 } // end of ArraysPractice
+
