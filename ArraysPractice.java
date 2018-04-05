@@ -55,6 +55,9 @@ public class ArraysPractice{
         System.out.println("\nValidate Paranthesis");
        // String paran = "((())(()))";
        // validateParanthesis(paran);
+        System.out.println("\nValidate Paranthesis");
+        String paran = "((())(()))";
+        validateParanthesis(paran);
 
     } // end of main
 
@@ -158,6 +161,7 @@ public class ArraysPractice{
       } // Distinct Ids
 
  /**     public static void validateParanthesis(String str){
+      public static void validateParanthesis(String str){
  
             int strLen = str.length();
     
@@ -168,6 +172,7 @@ public class ArraysPractice{
                 if(str.charAt(i) == ')'){
     //                boolean empty = Stack.isEmpty();
 					if(empty){
+                    if(Stack.isEmpty()){
                         System.out.println("Missmatched paranthesis");
                     }
                     else if(!isMatchingPair(Stack.pop(), str.charAt(i))){
@@ -178,6 +183,7 @@ public class ArraysPractice{
     
           } // end of validateParanthesis
 **/
+   
       public static boolean isMatchingPair(char char1, char char2){
           if(char1 == '(' && char2 == ')'){
               return true;
@@ -208,3 +214,4 @@ public class ArraysPractice{
       } // end of palindromicScore
 
 } // end of ArraysPractice
+
