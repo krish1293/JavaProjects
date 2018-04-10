@@ -52,11 +52,9 @@ public class ArraysPractice{
         System.out.println("\nWordLen4InStr");
         String str = "This sentence has four words";
         wordLen4InStr(str);
+        
         System.out.println("\nValidate Paranthesis");
-       // String paran = "((())(()))";
-       // validateParanthesis(paran);
-        System.out.println("\nValidate Paranthesis");
-        String paran = "((())(()))";
+        String paran = "((()(()))";
         validateParanthesis(paran);
 
     } // end of main
@@ -160,29 +158,31 @@ public class ArraysPractice{
           return size - count;
       } // Distinct Ids
 
- /**     public static void validateParanthesis(String str){
       public static void validateParanthesis(String str){
- 
+            System.out.println(str);
+
             int strLen = str.length();
-    
+            Stack st = new Stack();
             for(int i = 0; i < strLen; i++){
                 if(str.charAt(i) == '('){
-                    Stack.push(str.charAt(i));
+                    System.out.printf("str.charAt(%d) before push: %c\n",i, str.charAt(i));
+                    st.push(str.charAt(i));
                 }
                 if(str.charAt(i) == ')'){
-    //                boolean empty = Stack.isEmpty();
-					if(empty){
-                    if(Stack.isEmpty()){
+                    System.out.printf("str.charAt(%d) before isEmpty: %c\n",i, str.charAt(i));
+                    if(st.isEmpty()){
                         System.out.println("Missmatched paranthesis");
+                    } else {
+						Object pop = st.pop();
+						if(!isMatchingPair((char)pop, str.charAt(i))){
+                            System.out.println("Paranthesis are matching");
                     }
-                    else if(!isMatchingPair(Stack.pop(), str.charAt(i))){
-                        System.out.println("Paranthesis are maching");
-                    }
+					}
                 }
             }
     
           } // end of validateParanthesis
-**/
+
    
       public static boolean isMatchingPair(char char1, char char2){
           if(char1 == '(' && char2 == ')'){
