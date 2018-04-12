@@ -77,6 +77,11 @@ public class CodingPractice{
         String[] w = {"New", "words", "to", "count", "number", "of", "words", "in", "an", "array", "new", "new", "count"};
         countEachWord(w, words);
         System.out.println(words);
+
+        //17. Sum of 2 fractions
+        addFraction(1, 2, 3, 2);
+        addFraction(1, 3, 3, 9);
+        addFraction(1, 500, 2, 1500);
     } // main
 
     //1. F(n) = F(n-1) + F(n-2)
@@ -267,6 +272,36 @@ public class CodingPractice{
         }
     } // countEachWord
 
+    //17. There are two fractions examples: F1 = 3/4 and F2 = 5/6. Compute their sum and return the result.
+    public static void addFraction(int num1, int den1, int num2, int den2){
+        int den3 = gcd(den1, den2);
+        System.out.printf("gcd: %d\n", den3);
+
+        // count LCM: Least common Multiple
+        den3 = (den1*den2)/den3;
+
+        System.out.printf("lcm: %d\n", den3);
+
+        // change fractions to have same denominator (add fraction)
+        int num3 = ((num1) * (den3/den1)) + ((num2) * (den3/den2));
+
+        int commFact = gcd(den3, num3);
+        den3 = den3/commFact;
+        num3 = num3/commFact;
+
+        System.out.printf("%d/%d + %d/%d = %d/%d\n", num1, den1, num2, den2, num3, den3);
+
+    } // addFraction
+
+    public static int gcd(int a, int b){
+        
+        if (a == 0){
+            return b;
+        }
+        return gcd(b%a, a);
+
+    } //gcd
+
 } // CodingPractice
 
 class LinkedList{
@@ -289,21 +324,21 @@ class LinkedList{
     }
 
     public void pushatEnd(int newData){
-
-        Node newNode = new Node(newData);
-
+        
         if(head == null){
             head = new Node(newData);
+            //head.next = null;
+            System.out.println(head.data);
+            
         }
-
-        newNode.next = null;
-
-        Node last = head;
-        while(last.next != null){
-            last = last.next;
+        else{
+            Node newNode = new Node(newData);
+            Node last = head;
+            while(last.next != null){
+                last = last.next;
+            }
+            last.next = newNode;
         }
-
-        last.next = newNode;
     }
 
     //4. Print middle of Linked List
@@ -315,9 +350,11 @@ class LinkedList{
         Node firstNode = head;
         Node secondNode = head;
 
-        if(firstNode != null && firstNode.next != null){
-            firstNode = firstNode.next.next;
-            secondNode = secondNode.next;
+        if(head != null){
+            while(firstNode != null && firstNode.next != null){
+                firstNode = firstNode.next.next;
+                secondNode = secondNode.next;
+            }
         }
 
         printList();
@@ -326,7 +363,7 @@ class LinkedList{
 
     public void printList(){
         Node last = head;
-        while(last.next != null){
+        while(last != null){
             System.out.print(last.data + " ");
             last = last.next;
         }
