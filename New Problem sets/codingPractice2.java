@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class codingPractice2{
 
     public static void main(String[] args) {
@@ -13,6 +15,11 @@ public class codingPractice2{
         if(pow10){
             System.out.printf("%d is power of 10\n", 1000);
         }
+        // 4. Median
+        int[] arr1 = {3, 6, 9 ,2};
+        int[] arr2 = {10, 8, 1, 4};
+        int med = median(arr1, arr2);
+        System.out.printf("Median: %d\n", med);
 
         // 5. pairs
         int[] arr = {3,2,5,4,6,10,1,0,8};
@@ -63,6 +70,53 @@ public class codingPractice2{
     } // powTen
 
     //4. Given two unsorted arrays, find the median (not the brute force approach).
+    public static int median(int[] arr1, int[] arr2){
+        Arrays.sort(arr1);
+        Arrays.sort(arr2);
+
+        int[] arr3 = merge(arr1, arr2);
+        int len = arr3.length;
+        int med = 0;
+        if((len % 2) == 1){
+            med = arr3[len/2];
+        }
+        else{
+            
+            int middle = len/2;
+            med = arr3[middle - 1] + arr3[middle];
+            med = med/2;
+        }  
+        
+        return med;
+
+    } // median
+
+    public static int[] merge(int[] arr1, int[] arr2){
+        int n = arr1.length;
+        int m = arr2.length;
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        int arr3[] = new int[n+m];
+        while(i < n  && j < m){
+            if(arr1[i] <= arr2[j]){
+                arr3[k++] = arr1[i++];
+            }
+            else{
+                arr3[k++] = arr2[j++];
+            }
+        }
+
+        while(i < n){
+            arr3[k++] = arr1[i++];
+        }
+        while(j < m){
+            arr3[k++] = arr2[j++];
+        }
+
+        return arr3;
+    } // merge
+
     //5. Find the total number of pairs in array = k. 
     public static int pairs(int[] arr, int k){
         int countPairs = 0;
