@@ -25,6 +25,10 @@ public class codingPractice2{
         int[] arr = {3,2,5,4,6,10,1,0,8};
         int k = 10;
         System.out.printf("Total number of pairs adding up to %d are %d\n", k, pairs(arr, k));
+
+        // 6.Robot movment
+        String direct = "urdllduruu";
+        roboPosition(direct);
     } // main
 
     //1. There are two fractions example: F1 = 3/4 and F2 = 5/6. You need to compute their sum and return the result. 
@@ -135,10 +139,64 @@ public class codingPractice2{
     //6. Given a robot which can only move in four directions, UP(U), DOWN(D), LEFT(L), RIGHT(R). 
     //   Given a string consisting of instructions to move. Output the co-ordinates of robot after the executing the instructions. 
     //   Initial position of robot is at origin(0, 0).
+    public static void roboPosition(String str){
+        char[] ch = str.toCharArray();
+        int up = 0;
+        int down = 0;
+        int left = 0;
+        int right = 0;
+
+        for(int i = 0; i < ch.length; i++){
+            if(ch[i] == 'u'){
+                up++;
+            }
+            else if(ch[i] == 'd'){
+                down++;
+            }
+            else if(ch[i] == 'l'){
+                left++;
+            }
+            else if(ch[i] == 'r'){
+                right++;
+            }
+        }
+        int x = up - down;
+        int y = right - left;
+
+        System.out.printf("Directions %s: coordinates (%d, %d)\n", str, x, y);
+
+        
+    } // roboPosition
+
     //7. Spiral order traversal of the matrix
     //8. Subarray with 0 sum
     //9. Car has to be given on rent. Different people come and ask for it for interval [s, e] and offer some price p. 
     //   To whom shall the car be given in order to earn maximum.
+    //10. Problem for BFS.
+    //11. Loop in a linked list
+    //12. 5th element from last of linked list
+    //13. Tree given with 2 nodes having same child. Find that sort of thing in tree.
+    //14. Find the common ancestor of 2 nodes in binary tree.
+    //15. Given an array, need to go from 0-n, with almost no. of steps as a[i]. Find minimum steps we need for given array.
+    //16. Angle between hour hand and minute hand at a given time.
+    //17. Create data structure with pop(), push(), top(), min() in O(1)
+    //18. Largest contiguous substring with no repeating elements. 
+    //19. Given an string and a burst length, output the string that count of the same adjacent characters 
+    //     in string are less than burst length. 
+    //20. Given an array of distinct integers, output the number of sub-sequences of length 3, 
+    //    either in increasing or decreasing order.
+    //21. Given an array of integers and a sum, output the number of pairs whose addition is equal to the given sum. 
+    //22. Given a sequence of M and N with M representing increasing and N representing decreasing, 
+    //    output the smallest number that follows this patten. 
+    //23. Given a string, the task is to find maximum consecutive repeating character in string
+    //24. Print the reverse order of the string.
+    //25. Given permutations with only adjacent swaps allowed. 
+    //26. Given an array of non-negative numbers & a target value, 
+    //    return the length of smallest subarray whose sum is greater than the target value. 
+    //27. Find the largest number from the array of number.
+    //28. Given an array, find the number of contiguous subarrays such that the product of the elements of the 
+    //    subarray is less than or equal to a given positive integer k. 
+ 
 
 
 } // codingPractice2
