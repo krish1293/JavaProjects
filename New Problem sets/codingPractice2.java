@@ -244,6 +244,9 @@ public class codingPractice2{
     public static int maxPrice(int start, int end, int price){
         Map<Integer, Integer> carValue = new HashMap<>();
         int interval = end - start; 
+        int max = 0; 
+        
+        return max;
     }
     //10. Problem for BFS.
     //11. Loop in a linked list
