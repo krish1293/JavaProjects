@@ -1,5 +1,7 @@
 import java.util.*;
 
+
+
 public class codingPractice2{
 
     public static void main(String[] args) {
@@ -29,6 +31,19 @@ public class codingPractice2{
         // 6.Robot movment
         String direct = "urdllduruu";
         roboPosition(direct);
+
+        // 7. Spiral print of the matrix
+        int rLen = 3;
+        int cLen = 6;
+        int matrix[][] = { {1,  2,  3,  4,  5,  6},
+        {7,  8,  9,  10, 11, 12},
+        {13, 14, 15, 16, 17, 18}
+        };
+        printSpiral(matrix, rLen, cLen);
+
+        // 8. Subarray with 0 sum
+        int[] origArr = {4, 2, -3, 1, 6};
+        sumZero(origArr);
     } // main
 
     //1. There are two fractions example: F1 = 3/4 and F2 = 5/6. You need to compute their sum and return the result. 
@@ -160,8 +175,8 @@ public class codingPractice2{
                 right++;
             }
         }
-        int x = up - down;
-        int y = right - left;
+        int y = up - down;
+        int x = right - left;
 
         System.out.printf("Directions %s: coordinates (%d, %d)\n", str, x, y);
 
@@ -169,9 +184,67 @@ public class codingPractice2{
     } // roboPosition
 
     //7. Spiral order traversal of the matrix
+    public static void printSpiral(int[][] matrix, int rLen, int cLen){
+        int rStart = 0;
+        int cStart = 0;
+        
+        while(rStart < rLen && cStart < cLen){
+
+            for(int i = cStart; i < cLen; i++){
+                System.out.print(matrix[rStart][i] + " ");
+            }
+            rStart++;
+
+            for(int i = rStart; i < rLen; i++){
+                System.out.print(matrix[i][cLen-1] + " ");
+            }
+            cLen--;
+
+            if(rStart < rLen){
+                for(int i = cLen-1; i >= cStart; i--){
+                    System.out.print(matrix[rLen-1][i] + " ");
+                }
+                rLen--;
+            }
+
+            if(cStart < cLen){
+                for(int i = rLen - 1; i >= rStart; i--){
+                    System.out.print(matrix[i][cStart] +" ");
+                    cStart++;
+                }
+            }
+        }
+        System.out.println();
+    } // printSpiral
+
     //8. Subarray with 0 sum
+    public static void sumZero(int[] arr){
+        int len = arr.length;
+        int sum = arr[0];
+        int start = 0; 
+
+        for(int i = 1; i < len; i++){
+            // 
+            while(sum > 0 &&  start < i - 1){
+                sum -= arr[start++];
+            }
+            if(sum == 0){
+                int p = i - 1;
+                System.out.printf("Sum found between %d and %d\n", start, p);
+            }
+
+            if(i < len){
+                sum += arr[i];
+            }
+        }
+    } // sumZero
+
     //9. Car has to be given on rent. Different people come and ask for it for interval [s, e] and offer some price p. 
     //   To whom shall the car be given in order to earn maximum.
+    public static int maxPrice(int start, int end, int price){
+        Map<Integer, Integer> carValue = new HashMap<>();
+        int interval = end - start; 
+    }
     //10. Problem for BFS.
     //11. Loop in a linked list
     //12. 5th element from last of linked list
