@@ -44,6 +44,11 @@ public class codingPractice2{
         // 8. Subarray with 0 sum
         int[] origArr = {4, 2, -3, 1, 6};
         sumZero(origArr);
+
+        // 16. 
+        System.out.println(anglebetweenHrnSechands(9, 60)+" degree");
+        System.out.println(anglebetweenHrnSechands(3, 30)+" degree");
+
     } // main
 
     //1. There are two fractions example: F1 = 3/4 and F2 = 5/6. You need to compute their sum and return the result. 
@@ -255,6 +260,33 @@ public class codingPractice2{
     //14. Find the common ancestor of 2 nodes in binary tree.
     //15. Given an array, need to go from 0-n, with almost no. of steps as a[i]. Find minimum steps we need for given array.
     //16. Angle between hour hand and minute hand at a given time.
+    //    Hour hand: 12 hr (720 minutes) to finish 360 degree: 360/720 = 0.5 per minute
+    //    Second hand: 60 minutes to finish 360 degree: 360/60 = 6 per minute
+
+    public static int anglebetweenHrnSechands(double hr, double min){
+        int angle = 0;
+
+        if(hr < 0 || min < 0 || hr > 12.00 || min > 60.00){
+            System.out.printf("Invalid %f hr and %f minute\n", hr, min);
+            return -1;
+        }
+        if(hr == 12.00){
+            hr = 0;
+        }
+        if(min == 60){
+            min = 0;
+        }
+
+        int hr_angle = (int)(0.5 * (hr*60 + min));
+        int min_angle = (int)(6*min);
+
+        angle = Math.abs(hr_angle - min_angle);
+
+        angle = Math.min(360-angle, angle);
+
+        return angle;
+    } // anglebetweenHrnSecHands
+
     //17. Create data structure with pop(), push(), top(), min() in O(1)
     //18. Largest contiguous substring with no repeating elements. 
     //19. Given an string and a burst length, output the string that count of the same adjacent characters 
