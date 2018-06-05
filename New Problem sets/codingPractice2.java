@@ -4,7 +4,9 @@ import java.util.*;
 
 public class codingPractice2{
 
-    public static void main(String[] args) {
+    private static final int INT = -1;
+
+	public static void main(String[] args) {
         
         // 1. addFrac
         addFrac(1, 500, 2, 1500);
@@ -45,10 +47,60 @@ public class codingPractice2{
         int[] origArr = {4, 2, -3, 1, 6};
         sumZero(origArr);
 
+        // 15. minSteps
+        int[] target = {16, 16, 16};
+        int len = target.length;
+        int steps = minSteps(target, len);
+        System.out.println("Minimum number of rsteps required to get the given \n" +
+                            " target array is " + steps);
         // 16. 
         System.out.println(anglebetweenHrnSechands(9, 60)+" degree");
         System.out.println(anglebetweenHrnSechands(3, 30)+" degree");
 
+        //18. Longest consecutive substring w/o repeating chars
+        String str = "GEEKSFORGEEKS";
+        System.out.println("The input string is "+str);
+        int maxlen = maxContSubstr(str);
+        System.out.println("The length of "
+                + "the longest non repeating character is "+maxlen);
+
+        //20. Distinct integers of length 3
+        int[] dist = {1, 9, 3, 10, 4, 20, 2};
+        subSeq3(dist);
+
+        //21. Count pairs with given sum
+        int[] nums = {1, 4, 45, -40, 6, 10, 8, INT, -3};
+        int sum = 5;
+        System.out.println("Total number of pairs with given  sum " + sum + " is(are) " + countPairs(nums, sum));
+
+        //23. maxRepeatChar
+        String chars = "aabbcccaaaabbb";
+        consRepeatChar(chars);
+
+        //25. permutations
+        String str1 = "abc";
+        int index = 0;
+        int strLen = str1.length(); 
+        findPermutation(str1, index, strLen-1);
+
+        // 26. Smallest subarray with sum greater than target value
+        int[] ints = {1, 2, 3, 4};
+        int x = 6;
+        int min_Sub = smallLen(ints, x);
+        System.out.println("Smallest length of subarray: " + min_Sub); 
+        
+        // 30. Given two words, find if second word is the round rotation of first word.
+        String s1 = "ABCDef";
+        String s2 = "CDABda";
+
+        boolean roundRot = isRoundRotation(s1, s2);
+        System.out.println(roundRot);
+        if(roundRot){
+            System.out.printf("\n%s is round rotation of %s\n", s2, s1);
+        }
+        else{
+            System.out.printf("\n%s is not round rotation of %s\n", s2, s1);
+        }
     } // main
 
     //1. There are two fractions example: F1 = 3/4 and F2 = 5/6. You need to compute their sum and return the result. 
@@ -259,6 +311,42 @@ public class codingPractice2{
     //13. Tree given with 2 nodes having same child. Find that sort of thing in tree.
     //14. Find the common ancestor of 2 nodes in binary tree.
     //15. Given an array, need to go from 0-n, with almost no. of steps as a[i]. Find minimum steps we need for given array.
+    public static int minSteps(int[] arr, int n){
+        int numSteps = 0;
+        while(true){
+            int zeroes = 0;
+
+            int i;
+            for(i = 0; i < n; i++){
+
+                if(arr[i]%2 == 1){                   
+                    break; 
+                }
+
+                if(arr[i] == 0){
+                    zeroes++;
+                }
+            }
+            if(zeroes == n){
+                return numSteps;
+            }
+
+            if(i == n){
+                for(int j = 0; j < n; j++){
+                    arr[j] = arr[j]/2;
+                }
+                numSteps++;
+            }
+
+            for(int j = i; j < n; j++){
+                if(arr[j]%2 == 1){
+                    arr[j]--;
+                    numSteps++;
+                }
+            }
+        }
+    } // minSteps
+   
     //16. Angle between hour hand and minute hand at a given time.
     //    Hour hand: 12 hr (720 minutes) to finish 360 degree: 360/720 = 0.5 per minute
     //    Second hand: 60 minutes to finish 360 degree: 360/60 = 6 per minute
@@ -268,7 +356,7 @@ public class codingPractice2{
 
         if(hr < 0 || min < 0 || hr > 12.00 || min > 60.00){
             System.out.printf("Invalid %f hr and %f minute\n", hr, min);
-            return -1;
+            return INT;
         }
         if(hr == 12.00){
             hr = 0;
@@ -289,22 +377,227 @@ public class codingPractice2{
 
     //17. Create data structure with pop(), push(), top(), min() in O(1)
     //18. Largest contiguous substring with no repeating elements. 
+    public static int maxContSubstr(String str){
+        int max_len = 1;
+        int curr_len = 1;
+        int len = str.length();
+        int len2 = len;
+		int[] visited = new int[256];
+        int prev_index; 
+
+        for(int i = 0; i < len2; i++){
+            visited[i] = INT;
+        }
+
+        visited[str.charAt(0)] = 0;
+
+        for(int i = 1; i < len2; i++){
+            prev_index = visited[str.charAt(i)];
+
+            // curr char doesnt exsist in sequence so far
+            if(prev_index == INT || i - curr_len > prev_index ){
+                curr_len++;
+            }
+            else{
+                if(curr_len > max_len){
+                    max_len = curr_len;
+                }
+                curr_len = i - prev_index;
+            }
+
+            //update the index of curr index
+            visited[str.charAt(i)]  = i;
+
+            System.out.printf("str.charAt(%d)  visited[%c]\n", i, str.charAt(i));
+        }
+
+        if(curr_len > max_len){
+            max_len = curr_len;
+        }
+
+        return max_len;
+    } // maxCountSubStr
+
     //19. Given an string and a burst length, output the string that count of the same adjacent characters 
     //     in string are less than burst length. 
     //20. Given an array of distinct integers, output the number of sub-sequences of length 3, 
     //    either in increasing or decreasing order.
+    public static void subSeq3(int[] distInts){
+        HashSet<Integer> s = new HashSet<>();
+        int ans = 0;
+
+        for(int i = 0; i < distInts.length; i++){
+            s.add(distInts[i]);
+        }
+
+        for(int i = 0; i < distInts.length; i++){
+            if(!s.contains(distInts[i] - 1)){
+                int j = distInts[i];
+                while(s.contains(j) && ans != 3){
+                    j++;
+                }
+                if(ans < j - distInts[i]){
+                    ans = j - distInts[i];
+                }
+            }
+            System.out.println(s);
+        }
+    } // subSeq3
+
     //21. Given an array of integers and a sum, output the number of pairs whose addition is equal to the given sum. 
+    public static int countPairs(int[] nums, int sum){
+        int count = 0;
+        HashSet<Integer> s = new HashSet<>();
+        for(int i = 0; i < nums.length; i++){
+            int temp = sum - nums[i];
+
+            if(temp >=0 && s.contains(temp)){
+                count++;
+                System.out.printf("\nPair with %d is (%d, %d)\n", sum, nums[i], temp);
+            }
+            s.add(nums[i]);
+        }
+        return count;
+    } // countPairs
+
     //22. Given a sequence of M and N with M representing increasing and N representing decreasing, 
     //    output the smallest number that follows this patten. 
     //23. Given a string, the task is to find maximum consecutive repeating character in string
+    public static void consRepeatChar(String str){
+        
+        int countCh = 0;
+        int currCount = 0;
+        char maxRep = str.charAt(0);
+
+        for(int i = 0; i < str.length() - 1; i++){
+            if(str.charAt(i) == str.charAt(i+1)){
+                currCount++;
+
+            }
+            else{
+                if(currCount > countCh){
+                    countCh = currCount;
+                    maxRep = str.charAt(i);
+                }
+                currCount=1;
+            }
+        }
+        System.out.println("Maximum repeating char in " + str + " is " + maxRep);
+
+
+    } // consRepeatChar
+
     //24. Print the reverse order of the string.
     //25. Given permutations with only adjacent swaps allowed. 
+    public static void findPermutation(String str, int index, int strLen){
+       if(index == strLen){
+           System.out.println(str);
+       }
+       else{
+           for(int i = index; i <= strLen; i++){
+                str = swap(str, index, i);
+                findPermutation(str, index+1, strLen);
+                str = swap(str, index, i);
+            }
+       }
+    
+    } // findPermutations
+
+    public static String swap(String str, int n1, int n2){
+        char temp;
+        char[] chArr = str.toCharArray();
+        temp = chArr[n1];
+        chArr[n1] = chArr[n2];
+        chArr[n2] = temp;
+        return String.valueOf(chArr); 
+        
+    }
     //26. Given an array of non-negative numbers & a target value, 
     //    return the length of smallest subarray whose sum is greater than the target value. 
+    public static int smallLen(int[] arr, int k){
+        int start = 0;
+        int end = 0; 
+        int n = arr.length;
+        int curr_sum = 0; 
+        int min_len = n + 1;
+
+        while(end < n){
+            while(curr_sum <= k && end < n){
+                curr_sum += arr[end++];
+                System.out.println(curr_sum);
+            }
+            
+            while(curr_sum > k && start < n){
+                if(end-start < min_len){
+                    min_len = end-start;
+                }
+                curr_sum -= arr[start++];
+            }
+        }
+       
+        
+       
+        return min_len;
+    } // smallLen
+
     //27. Find the largest number from the array of number.
     //28. Given an array, find the number of contiguous subarrays such that the product of the elements of the 
     //    subarray is less than or equal to a given positive integer k. 
- 
+    public static int countSubProd(int[] prodArr, int prod){
+        int start = 0;
+        int end = 0; 
+        int n = prodArr.length;
+        int res = 0;
+        long p = 0;
 
+        for(start = 0, end = 0; end < n; end++ ){
+            p *= prodArr[end];
+
+            while(start<end && p >= prod){
+                p /= prodArr[start++];
+            }
+
+            if (p < prod){
+                int len = end - start + 1;
+                res += len;
+            }
+        }
+        return res;
+    } // countSubProd
+ 
+    // 30. Given two words, find if second word is the round rotation of first word.
+    static boolean isRoundRotation(String str1, String str2){
+        String temp = str1 + str1;
+        boolean rr = false;
+        int i = -1;
+        
+		if((str1.length() == str2.length()) && (temp.indexOf(str2) != i)){
+            rr = true;
+        }
+        return rr;
+
+    } // isRoundRotation
+    
+    // 31. Code for converting floating point decimal number to binary numbers.
+
+    // 32. Grey Code
+
+    // 33. Given a string of digits,find the next smallest number using the same digits.If its not possible to get such a number print -1;
+
+    // 34.Given a string, find the first element which is non -repetitive i.e that element must not be present anywhere else in the string.
+
+    // 35. Given an array of 1s followed by 0s,find the number of 0s
+
+    // 36.  Given an array of positive and negative numbers, find the pair of elements whose sum is closest to 0.
+
+    // 37. Given a Binary Tree , print all the root to leaf paths.
+    
+    // 38. Given a binary tree convert it to a double linked list.
+
+    // 39. A singly liked list. Can have a loop. Detect it and find the size of list.
+
+    // 40.  A singly link list and a number ‘K’, swap the Kth node from the start with the Kth node from the last. Check all the edge cases.
+
+    
 
 } // codingPractice2
