@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.String;
 
 
 
@@ -101,6 +102,9 @@ public class codingPractice2{
         else{
             System.out.printf("\n%s is not round rotation of %s\n", s2, s1);
         }
+
+        double n = 4.47;
+        System.out.println(floatToBinary(n));
     } // main
 
     //1. There are two fractions example: F1 = 3/4 and F2 = 5/6. You need to compute their sum and return the result. 
@@ -579,12 +583,45 @@ public class codingPractice2{
     } // isRoundRotation
     
     // 31. Code for converting floating point decimal number to binary numbers.
+    public static String floatToBinary(double num){
+        String binary = "";
+
+        int integral = num;
+        double dec = num - integral;
+
+        while(integral != 0){
+            int rem = integral % 2;
+            binary = rem + "0";
+            integral = integral/2; 
+        }
+
+        String revBinary = StringBuffer.revers(binary);
+        binary = revBinary;
+
+        String decNum = IntegerToString(num);
+        int len = decNum.length()-1;
+
+        while(len--){
+            int fract = dec * 2;
+
+            if(fract == 1){
+                dec = dec - fract;
+                binary = "1" + "0";
+            }
+            else{
+                binary = "0" + "0";
+            }
+        }
+
+
+        return binary;
+    } // floatToBinary
 
     // 32. Grey Code
 
     // 33. Given a string of digits,find the next smallest number using the same digits.If its not possible to get such a number print -1;
 
-    // 34.Given a string, find the first element which is non -repetitive i.e that element must not be present anywhere else in the string.
+    // 34. Given a string, find the first element which is non -repetitive i.e that element must not be present anywhere else in the string.
 
     // 35. Given an array of 1s followed by 0s,find the number of 0s
 
