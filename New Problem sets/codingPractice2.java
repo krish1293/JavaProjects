@@ -1,5 +1,5 @@
 import java.util.*;
-import java.util.String;
+//import java.util.String;
 
 
 
@@ -103,6 +103,7 @@ public class codingPractice2{
             System.out.printf("\n%s is not round rotation of %s\n", s2, s1);
         }
 
+        // 31. 
         double n = 4.47;
         System.out.println(floatToBinary(n));
     } // main
@@ -586,31 +587,35 @@ public class codingPractice2{
     public static String floatToBinary(double num){
         String binary = "";
 
-        int integral = num;
+        int integral = (int)num;
         double dec = num - integral;
 
-        while(integral != 0){
+        while(integral > 0){
             int rem = integral % 2;
-            binary = rem + "0";
+            System.out.println(integral + " " + rem);
+            binary = rem + binary;
+            System.out.println(binary);
             integral = integral/2; 
         }
 
-        String revBinary = StringBuffer.revers(binary);
-        binary = revBinary;
+        binary = binary + ".";
 
-        String decNum = IntegerToString(num);
+        String decNum = Double.toString(num);
         int len = decNum.length()-1;
 
-        while(len--){
-            int fract = dec * 2;
+        while(len > 0 ){
+            dec = dec * 2.00;
+            int fract = (int)dec;
+            System.out.println(dec + " " + fract);
 
             if(fract == 1){
                 dec = dec - fract;
-                binary = "1" + "0";
+                binary = binary + "1";
             }
             else{
-                binary = "0" + "0";
+                binary = binary + "0";
             }
+            len--;
         }
 
 
