@@ -107,7 +107,7 @@ public class codingPractice2{
         double n = 4.47;
         System.out.println(floatToBinary(n));
 
-        // 33. countzeros
+        // 35. countzeros
         int a[] = {1, 1, 1, 1, 0, 0, 0};
         System.out.println("Total number of zeros are " + countZeros(a, a.length));
     } // main
@@ -629,6 +629,10 @@ public class codingPractice2{
     // 32. Grey Code
 
     // 33. Given a string of digits,find the next smallest number using the same digits.If its not possible to get such a number print -1;
+  
+    // 34. Given a string, find the first element which is non -repetitive i.e that element must not be present anywhere else in the string.
+
+    // 35. Given an array of 1s followed by 0s,find the number of 0s
     public static int firstZero(int []arr, int low, int high){
         //Binary search
         
@@ -656,10 +660,6 @@ public class codingPractice2{
         }
         return (n - first);
     } // countZero
-
-    // 34. Given a string, find the first element which is non -repetitive i.e that element must not be present anywhere else in the string.
-
-    // 35. Given an array of 1s followed by 0s,find the number of 0s
 
     // 36.  Given an array of positive and negative numbers, find the pair of elements whose sum is closest to 0.
 
