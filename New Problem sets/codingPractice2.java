@@ -106,6 +106,10 @@ public class codingPractice2{
         // 31. 
         double n = 4.47;
         System.out.println(floatToBinary(n));
+
+        // 33. countzeros
+        int a[] = {1, 1, 1, 1, 0, 0, 0};
+        System.out.println("Total number of zeros are " + countZeros(a, a.length));
     } // main
 
     //1. There are two fractions example: F1 = 3/4 and F2 = 5/6. You need to compute their sum and return the result. 
@@ -625,6 +629,33 @@ public class codingPractice2{
     // 32. Grey Code
 
     // 33. Given a string of digits,find the next smallest number using the same digits.If its not possible to get such a number print -1;
+    public static int firstZero(int []arr, int low, int high){
+        //Binary search
+        
+        if(high >= low){
+            int mid = low + (high - low)/2;
+            if(((mid == 0) || (arr[mid-1] == 1)) && (arr[mid] == 0)){
+                return mid;
+            }
+            if(arr[mid] == 1){
+                return firstZero(arr, mid + 1, high);
+            }
+            else{
+                return firstZero(arr, low, mid - 1);
+            }
+        }
+
+        return -1;
+    } // firstZero
+
+    public static int countZeros(int []arr, int n){
+        int first = firstZero(arr, 0, n-1);
+
+        if(first == -1){
+            return 0;
+        }
+        return (n - first);
+    } // countZero
 
     // 34. Given a string, find the first element which is non -repetitive i.e that element must not be present anywhere else in the string.
 
